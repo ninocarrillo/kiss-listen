@@ -15,9 +15,11 @@ import time
 def print_frame(frame, time, count):
 	print(time, end=' ')
 	frame_len = len(frame)
-	print("%10d" % count, end=' ')
-	print("KISS frame contains", frame_len, end=' bytes\r\n')
-	frame_lines = (frame_len // 16) + 1
+	print("%8d" % count, end='  ')
+	print("KISS frame contains", frame_len, end=' bytes:\r\n')
+	frame_lines = (frame_len // 16)
+	if (frame_len % 16) > 0:
+		frame_lines += 1
 	last_line_len = frame_len - (frame_lines * 16)
 	frame_index = 0
 	for line in range(0, frame_lines):
